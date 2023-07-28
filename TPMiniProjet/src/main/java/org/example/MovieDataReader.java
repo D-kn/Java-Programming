@@ -17,7 +17,7 @@ public class MovieDataReader {
         boolean isFirstLine = true;
 
         for (String line : lines) {
-            // Skip the first line specially for tMovies file
+            // Skip the first line
             if (isFirstLine) {
                 isFirstLine = false;
                 continue;
@@ -25,19 +25,16 @@ public class MovieDataReader {
                 String[] data = line.split(";");
 //            System.out.println(data.length);
             if (data.length == 5) {
-                int id = Integer.parseInt(data[0].trim());
                 String title = data[1].trim();
+                String director = data[3].trim();
                 int year = Integer.parseInt(data[2].trim());
-                String director = data[4].trim();
-
-//                charger deux fichiers
-//                fais un merge entre les deux fichiers
 
                 // Create a Movie object with incomplete data (director will be fetched later)
-                Movie movie = new Movie(id, title, year, director);
+                Movie movie = new Movie(title, year, director);
                 movies.add(movie);
             }
         }
+
         return movies;
     }
 

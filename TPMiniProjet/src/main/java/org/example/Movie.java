@@ -1,7 +1,6 @@
 package org.example;
 
 public class Movie {
-    private int id;
     private String title;
     private int year;
     private String director;
@@ -10,20 +9,13 @@ public class Movie {
 
     }
 
-    public Movie(int id, String title, int year, String director) {
-        this.id = id;
+    public Movie(String title, int year, String director) {
         this.title = title;
         this.year = year;
         this.director = director;
     }
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getTitle() {
         return title;
