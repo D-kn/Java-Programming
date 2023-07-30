@@ -70,14 +70,12 @@ public class MovieDataReader {
         }
     }
 
-
     public List<Movie> getMovies() {
         return movies;
     }
 
-
     // Filter movies only from 1993 year's
-    public List<Movie> filterMovies(List<Movie> movies) {
+    public List<Movie> filterMoviesFrom1993(List<Movie> movies) {
         List<Movie> filteredMovies = new ArrayList<>();
         for (Movie movie : movies) {
             if (movie.getYear() >= 1993) {
@@ -86,4 +84,5 @@ public class MovieDataReader {
         }
         return filteredMovies;
     }
+    // For the other method, the one (inserMovies()) which should connect this the connector we've put it in SQLConnector class
 }

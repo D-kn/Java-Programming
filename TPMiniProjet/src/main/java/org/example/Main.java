@@ -16,14 +16,26 @@ public class Main {
         MovieDataReader movieDataReader = new MovieDataReader();
         movieDataReader.mergeFiles(tMoviesFile, tDirectorsFile);
 
-        List<Movie> movies = movieDataReader.getMovies(); // get the list of the movies
-        SQLConnector sqlConnector = new SQLConnector("movies", "root", "Mysqlmysql1234####");
+        List<Movie> allMovies = movieDataReader.getMovies(); // get the list of all movies
+        List<Movie> filteredMovies = movieDataReader.filterMoviesFrom1993(allMovies);
+
+        // Create and register the listener
+        String logFile = workingDirectory + "\\notification_log.log";
+        Listener listener = new Listener(logFile);
+
+        //DataBase Name
+        String dataBase = "movies";
+        //tableName Name
+        String tableBase = "movie";
+        SQLConnector sqlConnector = new SQLConnector(dataBase, tableBase);
         sqlConnector.connect();
 
-        for (Movie movie : movies){
+        sqlConnector.register(listener);
+
+        for (Movie movie : filteredMovies){
             sqlConnector.insertMovie(movie);
         }
-
+        sqlConnector.unregister(listener);
         sqlConnector.disconnect();
     }
 }
